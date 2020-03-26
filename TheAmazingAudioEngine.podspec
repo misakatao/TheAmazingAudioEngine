@@ -40,15 +40,22 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   header_search_paths = ['TheAmazingAudioEngine/Library/TPCircularBuffer']
-  system_header_search_paths = ['TheAmazingAudioEngine/Library/TPCircularBuffer']
-  
   s.preserve_paths = header_search_paths
   
   s.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
 
-    'HEADER_SEARCH_PATHS' => header_search_paths.map{|path| "${PODS_ROOT}/#{s.name}/#{path} #{File.dirname(__FILE__)}/#{path} ${PODS_ROOT}/../../../#{path}"}.join(' '), # 正常路径，本地调试路径，当前Demo的相对路径
-    'SYSTEM_HEADER_SEARCH_PATHS' => system_header_search_paths.map{ |path| "${PODS_ROOT}/#{s.name}/#{path} #{File.dirname(__FILE__)}/#{path} ${PODS_ROOT}/../../../#{path} ${PODS_ROOT}/../../../#{path}"}.join(' '),
+	'HEADER_SEARCH_PATHS' => header_search_paths.map{ |path| 
+		"${PODS_ROOT}/#{s.name}/#{path} #{File.dirname(__FILE__)}/#{path} ${PODS_ROOT}/../../../#{path}"
+	}.join(' '), # 正常路径，本地调试路径，当前Demo的相对路径
+
+	'FRAMEWORK_SEARCH_PATHS' => header_search_paths.map{ |path| 
+		"${PODS_ROOT}/#{s.name}/#{path} #{File.dirname(__FILE__)}/#{path} ${PODS_ROOT}/../../../#{path}"
+	}.join(' '),
+    
+	'SYSTEM_HEADER_SEARCH_PATHS' => header_search_paths.map{ |path| 
+		"${PODS_ROOT}/#{s.name}/#{path} #{File.dirname(__FILE__)}/#{path} ${PODS_ROOT}/../../../#{path}"
+	}.join(' '),
   }
   
 end
