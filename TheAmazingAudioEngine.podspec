@@ -39,27 +39,5 @@ Pod::Spec.new do |s|
 					'-D_TPCircularBufferPeek=_AECBPeek'
   s.frameworks = 'AudioToolbox', 'Accelerate'
   s.requires_arc = true
-
-  src_root = '$(PODS_ROOT)/#{s.name}'
-  
-  s.pod_target_xcconfig = {
-	'DEFINES_MODULE' => 'YES',
-	
-	'GRPC_SRC_ROOT' => src_root,
-	'HEADER_SEARCH_PATHS' => '"$(inherited)" "$(GRPC_SRC_ROOT)"',
-	'USER_HEADER_SEARCH_PATHS' => '"$(GRPC_SRC_ROOT)"',
-	'USE_HEADERMAP' => 'NO',
-	# 'HEADER_SEARCH_PATHS' => header_search_paths.map{ |path| 
-	# 	"${PODS_ROOT}/#{s.name}/#{path} #{File.dirname(__FILE__)}/#{path} ${PODS_ROOT}/../../../#{path}"
-	# }.join(' '), # 正常路径，本地调试路径，当前Demo的相对路径
-    
-	# 'SYSTEM_HEADER_SEARCH_PATHS' => header_search_paths.map{ |path| 
-	# 	"${PODS_ROOT}/#{s.name}/#{path} #{File.dirname(__FILE__)}/#{path} ${PODS_ROOT}/../../../#{path}"
-	# }.join(' '),
-
-	# 'USER_HEADER_SEARCH_PATHS' => header_search_paths.map{ |path| 
-	# 	"${PODS_ROOT}/#{s.name}/#{path} #{File.dirname(__FILE__)}/#{path} ${PODS_ROOT}/../../../#{path}"
-	# }.join(' '),
-  }
   
 end
